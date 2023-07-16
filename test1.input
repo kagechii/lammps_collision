@@ -21,4 +21,5 @@ thermo 200
 
 dump id all atom 200 test1.lammpstrj
 
-run 40000
+#run 40000
+run 200

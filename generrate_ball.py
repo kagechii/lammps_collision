@@ -1,14 +1,11 @@
 import random
 
 class Atom:
-    def __init__(self, x, y, z):
+    def __init__(self, x, y, z, t):
         self.x = x
         self.y = y
         self.z = z
-        if x < 20:
-            self.type = 1
-        else :
-            self.type = 2      
+        self.type = t     
         r_x = random.uniform(-1, 1) * 3.0
         r_y = random.uniform(-1, 1) * 3.0
         r_z = random.uniform(-1, 1) * 3.0
@@ -17,35 +14,22 @@ class Atom:
         self.vz = r_z
 
 
-def add_ball(atoms, xpos, ypos, zpos):
-    r = 10
-    s = 2.0
+def add_ball(atoms, r, s, x_0, t):
     h = 0.5 * s
-    for ix in range(2 * r):
+    for ix in range(r):
         for iy in range(r):
             for iz in range(r):
-                x = ix * s
+                x = ix * s + x_0
                 y = iy * s
                 z = iz * s
-                x = x + xpos
-                y = y + ypos
-                z = z + zpos
-                atoms.append(Atom(x, y, z))
-                atoms.append(Atom(x, y+h, z+h))
-                atoms.append(Atom(x+h, y, z+h))
-                atoms.append(Atom(x+h, y+h, z))
+                atoms.append(Atom(x, y, z ,t))
+                atoms.append(Atom(x, y+h, z+h, t))
+                atoms.append(Atom(x+h, y, z+h, t))
+                atoms.append(Atom(x+h, y+h, z, t))
 
 
-xlo = 0
-xhi = 40
-ylo = 0
-yhi = 20
-zlo = 0
-zhi = 20
-box = [xlo, xhi, ylo, yhi, zlo, zhi]
 
-
-def save_file(filename, atoms,):
+def save_file(filename, atoms, r, s):
     with open(filename, "w") as f:
         f.write("Position Data\n\n")
         f.write(f"{len(atoms)} atoms\n")
@@ -66,6 +50,18 @@ def save_file(filename, atoms,):
 
 atoms = []
 
-add_ball(atoms, 0, 0, 0)
+r = 10
+s = 2.0
 
-save_file("test1.atoms", atoms)
+xlo = 0
+xhi = r * s * 2
+ylo = 0
+yhi = r * s
+zlo = 0
+zhi = r * s
+box = [xlo, xhi, ylo, yhi, zlo, zhi]
+
+add_ball(atoms, r, s, 0, 0)
+add_ball(atoms, r, s, r * s, 1)
+
+save_file("test1.atoms", atoms, r, s)
