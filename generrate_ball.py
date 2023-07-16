@@ -61,7 +61,7 @@ zlo = 0
 zhi = r * s
 box = [xlo, xhi, ylo, yhi, zlo, zhi]
 
-add_ball(atoms, r, s, 0, 0)
-add_ball(atoms, r, s, r * s, 1)
+add_ball(atoms, r, s, 0, 1)
+add_ball(atoms, r, s, r * s, 2)
 
 save_file("test1.atoms", atoms, r, s)
