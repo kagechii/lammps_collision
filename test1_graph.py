@@ -56,12 +56,4 @@ LY = 20
 LZ = 20
 
 
-with open("test1.lammpstrj") as f:
-    for line in f:
-        if "ITEM: ATOMS" in line:
-            t, x, y, z = read_atoms(f)
-            rhoz = rho(t, x, y, z)
-            print(rhoz)
-        continue
-
 save_file("test1.rho")
