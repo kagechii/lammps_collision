@@ -35,6 +35,8 @@ def rho(t, x, y, z):
         if x[i] > LX:
             x[i] -= LX
         xi = int(x[i]/dx)
+        if xi == D:
+            xi = 0
         rhoz[xi] += 1.0/(LY*LZ*dx)
     return rhoz
 
