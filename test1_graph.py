@@ -36,15 +36,32 @@ def rho(t, x, y, z):
             x[i] -= LX
         xi = int(x[i]/dx)
         rhoz[xi] += 1.0/(LY*LZ*dx)
-    print(rhoz)
+    return rhoz
+
+
+def save_file(filename):
+    with open(filename, "w") as F:
+        with open("test1.lammpstrj") as f:
+            for line in f:
+                if "ITEM: ATOMS" in line:
+                    t, x, y, z = read_atoms(f)
+                    rhoz = rho(t, x, y, z)
+                    F.write("{}\n".format(rhoz))
+                continue
+    print("Generated {}".format(filename))
 
 
 LX = 40
 LY = 20
 LZ = 20
+
+
 with open("test1.lammpstrj") as f:
     for line in f:
         if "ITEM: ATOMS" in line:
             t, x, y, z = read_atoms(f)
-            rho(t, x, y, z)
+            rhoz = rho(t, x, y, z)
+            print(rhoz)
         continue
+
+save_file("test1.rho")
