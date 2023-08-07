@@ -39,15 +39,24 @@ def rho(t, x, y, z):
     return rhoz
 
 
+def save_frame(index, rhoz):
+    filename = f"frame{index:03d}.dat"
+    print(filename)
+    with open(filename, "w") as f:
+        for rho in rhoz:
+            f.write(f"{rho}\n")
+
+
 def save_file(filename):
-    with open(filename, "w") as F:
-        with open("test1.lammpstrj") as f:
-            for line in f:
-                if "ITEM: ATOMS" in line:
-                    t, x, y, z = read_atoms(f)
-                    rhoz = rho(t, x, y, z)
-                    F.write("{}\n".format(rhoz))
-                continue
+    with open("test1.lammpstrj") as f:
+        index = 0
+        for line in f:
+            if "ITEM: ATOMS" in line:
+                t, x, y, z = read_atoms(f)
+                rhoz = rho(t, x, y, z)
+                save_frame(index, rhoz)
+                index += 1
+            continue
     print("Generated {}".format(filename))
 
 
