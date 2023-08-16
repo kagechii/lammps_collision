@@ -23,7 +23,6 @@ def read_atoms(f):
 
 
 def rho(t, x, y, z):
-    dx = 0.5
     D = int(LX/dx)
     rhoz = np.zeros(D)
     N = len(t)
@@ -45,8 +44,8 @@ def save_frame(index, rhoz):
     filename = f"frame{index:03d}.dat"
     print(filename)
     with open(filename, "w") as f:
-        for rho in rhoz:
-            f.write(f"{rho}\n")
+        for i in range(len(rhoz)):
+            f.write(f"{i * dx} {rhoz[i]}\n")
 
 
 def save_file(filename):
@@ -66,5 +65,6 @@ LX = 40
 LY = 20
 LZ = 20
 
+dx = 0.5
 
 save_file("test1.rho")
