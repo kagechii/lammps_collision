@@ -50,7 +50,7 @@ def save_file(filename, atoms, r, s):
 
 atoms = []
 
-r = 10
+r = 20
 s = 2.0
 
 xlo = 0
