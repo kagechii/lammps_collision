@@ -16,9 +16,9 @@ pair_coeff 2 2 1.0 1.0 2.5
 neighbor 0.3 bin
 neigh_modify every 20 delay 0 check no
 
-fix 1 all nvt temp 3.0 3.0 0.1
+fix 1 all nvt temp 2.0 2.0 0.1
 thermo 200
 
-dump id all atom 200 temp30.lammpstrj
+dump id all atom 200 temp20.lammpstrj
 
 run 40000
