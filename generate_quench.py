@@ -16,7 +16,7 @@ class Atom:
         self.vz = r_z
 
 
-def add_ball(atoms, r, s, x_0, t):
+def add_ball(atoms, r, s, x_0):
     h = 0.5 * s
     for ix in range(r):
         for iy in range(r):
@@ -24,6 +24,7 @@ def add_ball(atoms, r, s, x_0, t):
                 x = ix * s + x_0
                 y = iy * s
                 z = iz * s
+                t = random.randint(1, 2)
                 atoms.append(Atom(x, y, z, t))
                 atoms.append(Atom(x, y+h, z+h, t))
                 atoms.append(Atom(x+h, y, z+h, t))
@@ -51,18 +52,17 @@ def save_file(filename, atoms, r, s):
 
 atoms = []
 
-r = 20
+r = 10
 s = 2.0
 
 xlo = 0
-xhi = r * s * 2
+xhi = r * s
 ylo = 0
 yhi = r * s
 zlo = 0
 zhi = r * s
 box = [xlo, xhi, ylo, yhi, zlo, zhi]
 
-add_ball(atoms, r, s, 0, 1)
-add_ball(atoms, r, s, r * s, 2)
+add_ball(atoms, r, s, 0)
 
 save_file("quench.atoms", atoms, r, s)
