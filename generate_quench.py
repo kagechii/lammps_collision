@@ -8,6 +8,7 @@ class Atom:
         self.y = y
         self.z = z
         self.type = t
+        t = random.randint(1, 2)
         r_x = random.uniform(-1, 1) * 3.0
         r_y = random.uniform(-1, 1) * 3.0
         r_z = random.uniform(-1, 1) * 3.0
@@ -24,7 +25,6 @@ def add_ball(atoms, r, s, x_0):
                 x = ix * s + x_0
                 y = iy * s
                 z = iz * s
-                t = random.randint(1, 2)
                 atoms.append(Atom(x, y, z, t))
                 atoms.append(Atom(x, y+h, z+h, t))
                 atoms.append(Atom(x+h, y, z+h, t))
