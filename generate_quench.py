@@ -3,12 +3,11 @@ import random
 
 
 class Atom:
-    def __init__(self, x, y, z, t):
+    def __init__(self, x, y, z):
         self.x = x
         self.y = y
         self.z = z
-        self.type = t
-        t = random.randint(1, 2)
+        self.type = random.randint(1, 2)
         r_x = random.uniform(-1, 1) * 3.0
         r_y = random.uniform(-1, 1) * 3.0
         r_z = random.uniform(-1, 1) * 3.0
@@ -25,10 +24,10 @@ def add_ball(atoms, r, s, x_0):
                 x = ix * s + x_0
                 y = iy * s
                 z = iz * s
-                atoms.append(Atom(x, y, z, t))
-                atoms.append(Atom(x, y+h, z+h, t))
-                atoms.append(Atom(x+h, y, z+h, t))
-                atoms.append(Atom(x+h, y+h, z, t))
+                atoms.append(Atom(x, y, z))
+                atoms.append(Atom(x, y+h, z+h))
+                atoms.append(Atom(x+h, y, z+h))
+                atoms.append(Atom(x+h, y+h, z))
 
 
 def save_file(filename, atoms, r, s):
